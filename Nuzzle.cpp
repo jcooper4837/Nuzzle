@@ -30,10 +30,10 @@ int main()
 		game.shuffleMatrix();
 		game.outputMatrix();
 		isSolved = false;
-		seconds startTime = duration_cast<seconds>(system_clock::now().time_since_epoch());
-		int count = 0;
+		seconds startTime = duration_cast<seconds>(system_clock::now().time_since_epoch()); // track total duration
+		int count = 0; // track number of moves
 
-		while (!isSolved)
+		while (!isSolved) // main game loop
 		{
 			cout << "\nEnter w for up, s for down, a for left, d for right: " << endl;
 			cin >> move;

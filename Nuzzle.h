@@ -19,22 +19,23 @@ protected:
 
 public:
 
+	
 	Nuzzle(int s)
 	{
 		size = s;
 		matrix = new int[size * size];
 		int count = 1;
 
-		for (int i = 0; i < (size * size) - 1; i++)
+		for (int i = 0; i < (size * size) - 1; i++) // initializes a default matrix
 		{
 			matrix[i] = count;
 			count++;
 		}
 
-		matrix[(size * size) - 1] = 0;
+		matrix[(size * size) - 1] = 0; // lower right spot is filled with a 0
 	}
 
-	void outputMatrix()
+	void outputMatrix() // draws a matrix table to console
 	{
 		cout << "+-------+-------+-------+";
 
@@ -85,7 +86,7 @@ public:
 		}
 	}
 
-	void shuffleMatrix()
+	void shuffleMatrix() // shuffles the default matrix into an unsolved state
 	{
 		do
 		{
@@ -99,16 +100,16 @@ public:
 				do
 				{
 					value = rand() % ((size * size));
-				} while (containsValue(list, value));
+				} while (containsValue(list, value)); // fill unique numbers only, no duplicates
 
 				matrix[i] = value;
 				list.push_back(value);
 			}
-		} while (!isSolvable());
+		} while (!isSolvable()); // if given matrix is an unsolvable solution, loop back and try again
 		cout << "\n";
 	}
 
-	bool containsValue(vector<int> list, int value)
+	bool containsValue(vector<int> list, int value) // checks if the value is already used to prevent duplicates
 	{
 		int count = 0;
 
@@ -126,7 +127,7 @@ public:
 		return false;
 	}
 
-	bool isSolvable()
+	bool isSolvable() // checks if the given matrix table is solvable using some linear algebra
 	{
 		int *list = new int[size * size];
 		int count = 0;
@@ -179,11 +180,11 @@ public:
 		}
 	}
 
-	void shiftMatrix(char m)
+	void shiftMatrix(char m) // take in user input and shift the proper number into the blank spot
 	{
 		int temp;
 
-		if (m == 'w')
+		if (m == 'w') // move number up into blank spot
 		{
 			for (int i = 0; i < (size * size) - size; i++)
 			{
@@ -196,7 +197,7 @@ public:
 				}
 			}
 		}
-		if (m == 's')
+		if (m == 's') // move number down into blank spot
 		{
 			for (int i = size; i < (size * size); i++)
 			{
@@ -209,7 +210,7 @@ public:
 				}
 			}
 		}
-		if (m == 'a')
+		if (m == 'a') // move number left into blank spot
 		{
 			for (int i = 0; i < (size * size); i++)
 			{
@@ -222,7 +223,7 @@ public:
 				}
 			}
 		}
-		if (m == 'd')
+		if (m == 'd') // move number right into blank spot
 		{
 			for (int i = 0; i < (size * size); i++)
 			{
@@ -237,7 +238,7 @@ public:
 		}
 	}
 
-	bool isValid()
+	bool isValid() // checks if the current state is a valid solution
 	{
 		int temp = 1;
 
